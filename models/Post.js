@@ -1,12 +1,17 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const User = require('./User')
+// const Post = require('./Post')
 // const Comment = require('./Comment')
 
 const PostSchema = new mongoose.Schema({
     image: { 
-        type: String,
+        type: String
+    },
+    genre: {type: String, required: true},
+    title: {
+       type: String, 
+        required: true 
     },
     summary: {
         type: String,
