@@ -59,7 +59,7 @@ router.post('/login', async (req, res) => {
     const token = jwt.sign({ id: user._id }, tokenSecret, { expiresIn: '1800s' });
     console.log({ token })
     const cookies = Cookies(req, res);
-    cookies.set('movierec.auth', token, { maxAge: Date.now() + 1000 * 60 * 60 * 24 }) // 24 hrs
+    cookies.set('movierec.auth', token, { maxAge: Date.now() + 1000 * 60 * 60 * 1000 }) // 24 hrs
     res.status(200).send('success');
 });
 router.get('/refresh', async (req, res) => {
