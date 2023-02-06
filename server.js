@@ -4,6 +4,7 @@ const morgan = require('morgan')
 const jwt = require('jsonwebtoken')
 
 const app = express();
+const port = process.env.PORT || 4999
 
 // controller import
 
@@ -19,8 +20,7 @@ app.use(express.json())
 require("dotenv").config()
 require('./config/db.connection')
 
-const {PORT, MONGODB_URI } = process.env
-// const port = process.env.PORT || 4000
+const {MONGODB_URI } = process.env
 
 //cors function
 app.use(cors())
@@ -34,4 +34,4 @@ app.use('/post', postController)
 app.get('/', (req,res) => res.redirect('/user'))
 
 
-app.listen(PORT, () => console.log(`Listening for client requests on port ${PORT}`));
+app.listen(port, () => console.log(`Listening for client requests on port ${port}`));
