@@ -15,7 +15,7 @@ const postController = require('./controllers/post-controller');
 const { json } = require('express');
  
 app.use(express.json())
- 
+  
   
 require("dotenv").config()
 require('./config/db.connection')
