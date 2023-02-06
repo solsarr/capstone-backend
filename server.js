@@ -19,8 +19,8 @@ app.use(express.json())
 require("dotenv").config()
 require('./config/db.connection')
 
-const { PORT, MONGODB_URI } = process.env
-
+const { MONGODB_URI } = process.env
+const port = process.env.PORT || 4000
 
 //cors function
 app.use(cors())
@@ -33,17 +33,5 @@ app.use('/post', postController)
 // root router
 app.get('/', (req,res) => res.redirect('/user'))
 
-// app.post('/api/login', (req,res) => {
-//     const user = {
-//         id: 1,
-//         username: 'John',
-//         email: 'John@gmail.com'
-//     };
-//     json.sign({user: user}, 'secretkey', (err, token) => {
-//         res.json({
-//             token,
-//         });
-//     });
-// });
 
-app.listen(PORT, () => console.log(`Listening for client requests on port ${PORT}`));
+app.listen(port, () => console.log(`Listening for client requests on port ${port}`));
