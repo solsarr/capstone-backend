@@ -6,7 +6,7 @@ const {MONGODB_URI} = process.env
 
 // DATABASE CONNECTION
 mongoose.set('strictQuery', true);
-mongoose.connect(MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://solomon:solomon@capstone.g9zziis.mongodb.net/test")
 
 // Connection Events
 mongoose.connection

@@ -21,7 +21,6 @@ require('./config/db.connection')
 
 const {PORT ,MONGODB_URI } = process.env
 
-const port = process.env.PORT || 4999
 //cors function
 app.use(cors())
 //morgan function
@@ -34,4 +33,4 @@ app.use('/post', postController)
 app.get('/', (req,res) => res.redirect('/user'))
 
 
-app.listen(port, () => console.log(`Listening for client requests on port ${port}`));
+app.listen(process.env.PORT || 4000);
