@@ -14,11 +14,6 @@ require('crypto').randomBytes(64).toString('hex')
 // router.use(express.json())
 
 const db = require('../models/user')
-// console.log(User)
-function generateAccessToken(username) {
-    return jwt.sign(User._id, process.env.TOKEN_SECRET, { expiresIn: '1800s' });
-}
-
 
 router.post('/signup', async (req, res) => {
     // parse user info from request i.e. const { name, email, password } = req.body
@@ -34,11 +29,14 @@ router.post('/signup', async (req, res) => {
 
     // save user with hashed password in database
     // create json web-token and set as session cookie
-    const token = jwt.sign({ id: newUser._id }, tokenSecret, { expiresIn: '1800s' });
+    const token = jwt.sign({ id: newUser._id }, tokenSecret, { expiresIn: '10000' });
     console.log({ token })
     const cookies = Cookies(req, res);
     cookies.set('movierec.auth', token, { maxAge: Date.now() + 1000 * 60 * 60 * 24 }) // 24 hrs
-    res.status(200).send('success');
+    res.status(200).json({
+        user: newUser,
+        token: token
+    });
 })
 
 router.post('/login', async (req, res) => {
@@ -56,34 +54,38 @@ router.post('/login', async (req, res) => {
     }
     // save user with hashed password in database
     // create json web-token and set as session cookie
-    const token = jwt.sign({ id: user._id }, tokenSecret, { expiresIn: '1800s' });
-    console.log({ token })
+    const token = jwt.sign({ id: user._id }, tokenSecret, { expiresIn: '10000' });
+    console.log('token = ',{ token })
     const cookies = Cookies(req, res);
-    cookies.set('movierec.auth', token, { maxAge: Date.now() + 1000 * 60 * 60 * 1000 }) // 24 hrs
-    res.status(200).send('success');
+    cookies.set('movierec.auth', token, { maxAge: Date.now() + 1000 * 60 * 60 * 1000 })
+    console.log(cookies)
+    res.status(201).json({
+        user: user,
+        token: token
+    });
 });
-router.get('/refresh', async (req, res) => {
-    console.log('workingngggg')
-    // ignore routes that don't need to be authenticated
-    const cookies = Cookies(req, res)
+// router.get('/refresh', async (req, res) => {
+//     console.log('workingngggg')
+//     // ignore routes that don't need to be authenticated
+//     const cookies = Cookies(req, res)
 
-    const cookie = cookies.get('movierec.auth')
-    console.log('cookie = ', cookie)
-    if (!cookie) {
-        return res.status(401).send('unauthorized')
-    }
-    const response = jwt.verify(cookie, tokenSecret)
-    console.log(response)
-    if (!response || !response.id) {
-        return res.status(401).send('unauthorized')
-    }
-    const user = await User.findById(response.id)
-    if (!user) {
-        res.status(401).send('unauthorized')
-    }
-    res.status(200).send('success')
+//     const cookie = cookies.get('movierec.auth')
+//     console.log('cookie = ', cookie)
+//     if (!cookie) {
+//         return res.status(401).send('unauthorized')
+//     }
+//     const response = jwt.verify(cookie, tokenSecret)
+//     console.log(response)
+//     if (!response || !response.id) {
+//         return res.status(401).send('unauthorized')
+//     }
+//     const user = await User.findById(response.id)
+//     if (!user) {
+//         res.status(401).send('unauthorized')
+//     }
+//     res.status(200).send('success')
 
-})
+// })
 
 //INDEX ROUTE
 router.get('/', authMiddleware, async (req, res) => {

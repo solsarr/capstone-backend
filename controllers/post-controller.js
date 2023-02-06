@@ -1,4 +1,6 @@
 const express = require('express')
+const authMiddleware = require('../middleware/authJwt')
+
 const router = express.Router()
 
 // const {User} = require('../models')

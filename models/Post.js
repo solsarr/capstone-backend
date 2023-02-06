@@ -16,6 +16,12 @@ const PostSchema = new mongoose.Schema({
     summary: {
         type: String,
         required : true,
+    },
+    owner: {
+        type: String
+    },
+    user: {
+        type: mongoose.Types.ObjectId, ref: "User"
     }
 }, {timestamps: true})
 
