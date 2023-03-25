@@ -6,14 +6,14 @@ const authMiddleware = require('../middleware/authJwt')
 
 const tokenSecret = process.env.TOKEN_SECRET || 'secret';
 
-const User = require('../models/user')
+const User = require('../models/User')
 // const { handleValidateOwnership, requireToken } = require('../middleware/auth')
 // const {Post} = require('../models')
 require('crypto').randomBytes(64).toString('hex')
 // Json body
 // router.use(express.json())
 
-const db = require('../models/user')
+const db = require('../models/User')
 
 router.post('/signup', async (req, res) => {
     // parse user info from request i.e. const { name, email, password } = req.body
