@@ -1,7 +1,7 @@
 const Cookies = require('cookies')
 const jwt = require('jsonwebtoken')
 const tokenSecret = process.env.TOKEN_SECRET || 'secret';
-const User = require('../models/user')
+const User = require('../models/User')
 
 
 const authMiddleware =  async (req, res, next) => {

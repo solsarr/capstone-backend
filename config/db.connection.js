@@ -12,4 +12,4 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://solomon:solomon@capst
 mongoose.connection
   .on("open", () => console.log("You are connected to mongoose"))
   .on("close", () => console.log("You are disconnected from mongoose")) 
-  .on("error", (error) => console.log(error));
+  .on("error", (error) => console.log(error))
