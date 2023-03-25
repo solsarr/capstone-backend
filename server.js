@@ -24,7 +24,7 @@ const {PORT ,MONGODB_URI } = process.env
 //cors function
 app.use(cors())
 //morgan function
-app.use(morgan('dev'))
+app.use(morgan('combined'))
 
 app.use('/user', userController)
 app.use('/post', postController)
