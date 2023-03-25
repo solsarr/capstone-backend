@@ -4,13 +4,13 @@ const authMiddleware = require('../middleware/authJwt')
 const router = express.Router()
 
 // const {User} = require('../models')
-const Post = require('../models/post')
+const Post = require('../models/Post')
 // const {Comment} = require('../models')
 
 // Json body
 router.use(express.json())
 
-const db = require('../models/post')
+const db = require('../models/Post')
 console.log(Post)
 // Routes
 router.get('/', async (req,res)=>{
